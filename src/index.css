@@ -20,3 +20,8 @@ html {
   background-color: white;
   font-size: 2rem;
 }
+
+.grid__box.win {
+  color: hotpink;
+  background-color: papayawhip;
+}

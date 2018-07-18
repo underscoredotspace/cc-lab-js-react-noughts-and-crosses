@@ -9,6 +9,7 @@ const Grid = props => {
           <Box
             handleClick={props.handleBoxClick}
             value={box}
+            win={props.win[index]}
             index={index}
             key={`box-${index}`}
           />

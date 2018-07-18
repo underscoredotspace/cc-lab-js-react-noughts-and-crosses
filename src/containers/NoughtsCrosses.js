@@ -8,7 +8,9 @@ export default class NoughtsCrosses extends Component {
 
     this.state = {
       player: 'o',
-      grid: new Array(9).fill(null)
+      grid: new Array(9).fill(null),
+      winArray: new Array(9).fill(0),
+      gameWon: false
     }
 
     this.handleBoxClick = this.handleBoxClick.bind(this)
@@ -40,14 +42,15 @@ export default class NoughtsCrosses extends Component {
       }
 
       if (gameWon) {
-        console.log('Yay!', player)
+        this.setState({ gameWon })
+        this.handleWin(player, win)
       }
     }
   }
 
   handleBoxClick(index) {
-    let { player, grid } = this.state
-    if (grid[index]) return
+    let { player, grid, gameWon } = this.state
+    if (grid[index] || gameWon) return
 
     grid[index] = player
     player === 'o' ? (player = 'x') : (player = 'o')
@@ -55,6 +58,10 @@ export default class NoughtsCrosses extends Component {
     this.setState({ player, grid }, () =>
       window.getSelection().removeAllRanges()
     )
+  }
+
+  handleWin(player, winArray) {
+    this.setState({ winArray })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -66,7 +73,11 @@ export default class NoughtsCrosses extends Component {
     return (
       <div>
         <CurrentPlayer player={this.state.player} />
-        <Grid handleBoxClick={this.handleBoxClick} grid={this.state.grid} />
+        <Grid
+          handleBoxClick={this.handleBoxClick}
+          grid={this.state.grid}
+          win={this.state.winArray}
+        />
       </div>
     )
   }
