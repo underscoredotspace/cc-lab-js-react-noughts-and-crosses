@@ -10,13 +10,28 @@ export default class NoughtsCrosses extends Component {
       player: 'o',
       grid: new Array(9).fill(null)
     }
+
+    this.handleBoxClick = this.handleBoxClick.bind(this)
+  }
+
+  handleBoxClick(index) {
+    if (this.state.grid[index]) {
+      return
+    }
+    let player
+    let grid = this.state.grid
+    grid[index] = this.state.player
+
+    this.state.player === 'o' ? (player = 'x') : (player = 'o')
+
+    this.setState({ player, grid })
   }
 
   render() {
     return (
       <div>
         <CurrentPlayer player={this.state.player} />
-        <Grid grid={this.state.grid} />
+        <Grid handleBoxClick={this.handleBoxClick} grid={this.state.grid} />
       </div>
     )
   }
