@@ -8,7 +8,7 @@ export default class NoughtsCrosses extends Component {
 
     this.state = {
       player: 'o',
-      grid: new Array(9)
+      grid: new Array(9).fill(null)
     }
   }
 
