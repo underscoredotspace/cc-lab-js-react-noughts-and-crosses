@@ -4,7 +4,7 @@ const Grid = props => {
   return (
     <div className="grid">
       {props.grid.map(box => {
-        return <div>{box}</div>
+        return <div className="grid__box">{box}</div>
       })}
     </div>
   )

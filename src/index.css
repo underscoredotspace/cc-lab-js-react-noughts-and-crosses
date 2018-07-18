@@ -1,3 +1,21 @@
 html {
   font-family: sans-serif;
+  font-size: 20px;
+}
+
+.grid {
+  display: inline-grid;
+  grid-template-columns: 3rem 3rem 3rem;
+  grid-template-rows: 3rem 3rem 3rem;
+  grid-gap: 0.25rem;
+  background-color: black;
+  padding: 0.25rem;
+  margin: 2rem;
+}
+
+.grid__box {
+  display: grid;
+  place-content: center;
+  background-color: white;
+  font-size: 2rem;
 }
