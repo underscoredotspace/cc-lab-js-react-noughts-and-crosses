@@ -50,5 +50,20 @@ body {
 
 .current-player,
 .game-winner {
-  text-align: center;
+  font-size: 2rem;
+  text-shadow: 0 0 7px white;
+  font-weight: bold;
+}
+
+.game-winner p {
+  animation: spin infinite 2s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
