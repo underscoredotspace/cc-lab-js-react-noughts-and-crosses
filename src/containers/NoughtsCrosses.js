@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CurrentPlayer from '../components/CurrentPlayer'
 import Grid from '../components/Grid'
+import GameWinner from '../components/GameWinner'
 
 export default class NoughtsCrosses extends Component {
   constructor(props) {
@@ -10,10 +11,12 @@ export default class NoughtsCrosses extends Component {
       player: 'o',
       grid: new Array(9).fill(null),
       winArray: new Array(9).fill(0),
-      gameWon: false
+      gameWon: false,
+      winner: null
     }
 
     this.handleBoxClick = this.handleBoxClick.bind(this)
+    this.resetGame = this.resetGame.bind(this)
   }
 
   checkForWin(player) {
@@ -61,7 +64,17 @@ export default class NoughtsCrosses extends Component {
   }
 
   handleWin(player, winArray) {
-    this.setState({ winArray })
+    this.setState({ winArray, winner: player })
+  }
+
+  resetGame() {
+    this.setState({
+      player: 'o',
+      grid: new Array(9).fill(null),
+      winArray: new Array(9).fill(0),
+      gameWon: false,
+      winner: null
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -78,6 +91,7 @@ export default class NoughtsCrosses extends Component {
           grid={this.state.grid}
           win={this.state.winArray}
         />
+        <GameWinner winner={this.state.winner} resetGame={this.resetGame} />
       </div>
     )
   }
