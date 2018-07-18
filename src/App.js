@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import NoughtsCrosses from './containers/NoughtsCrosses'
 
 class App extends Component {
   render() {
-    return <div className="App">Hello</div>
+    return <NoughtsCrosses />
   }
 }
 
