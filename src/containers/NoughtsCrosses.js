@@ -34,9 +34,8 @@ export default class NoughtsCrosses extends Component {
       [0, 0, 1, 0, 1, 0, 1, 0, 0]
     ]
 
-    let gameWon = true
-
     for (const win of wins) {
+      let gameWon = true
       for (const ndx in grid) {
         const box = grid[ndx]
         if (win[ndx] === 0) {
@@ -53,7 +52,7 @@ export default class NoughtsCrosses extends Component {
       }
     }
 
-    if (!gameWon) {
+    if (!this.state.winner) {
       if (!this.state.grid.includes(null)) {
         this.nobodyWins()
       }
