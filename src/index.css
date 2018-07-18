@@ -1,6 +1,5 @@
 html {
   font-family: sans-serif;
-  font-size: 20px;
   cursor: default;
   background-image: linear-gradient(
     to right bottom,
@@ -17,6 +16,7 @@ html {
 body {
   margin: 3rem 0 0 0;
   text-align: center;
+  overflow: hidden;
 }
 
 .grid {
