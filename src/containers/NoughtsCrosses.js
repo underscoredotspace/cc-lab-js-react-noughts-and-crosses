@@ -14,17 +14,52 @@ export default class NoughtsCrosses extends Component {
     this.handleBoxClick = this.handleBoxClick.bind(this)
   }
 
-  handleBoxClick(index) {
-    if (this.state.grid[index]) {
-      return
+  checkForWin(player) {
+    const grid = this.state.grid
+    const wins = [
+      [1, 1, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 1, 1],
+      [1, 0, 0, 1, 0, 0, 1, 0, 0],
+      [0, 1, 0, 0, 1, 0, 0, 1, 0],
+      [0, 0, 1, 0, 0, 1, 0, 0, 1],
+      [1, 0, 0, 0, 1, 0, 0, 0, 1],
+      [0, 0, 1, 0, 1, 0, 1, 0, 0]
+    ]
+
+    for (const win of wins) {
+      let gameWon = true
+      for (const ndx in grid) {
+        const box = grid[ndx]
+        if (win[ndx] === 0) {
+          continue
+        } else if (box !== player) {
+          gameWon = false
+          break
+        }
+      }
+
+      if (gameWon) {
+        console.log('Yay!', player)
+      }
     }
-    let player
-    let grid = this.state.grid
-    grid[index] = this.state.player
+  }
 
-    this.state.player === 'o' ? (player = 'x') : (player = 'o')
+  handleBoxClick(index) {
+    let { player, grid } = this.state
+    if (grid[index]) return
 
-    this.setState({ player, grid })
+    grid[index] = player
+    player === 'o' ? (player = 'x') : (player = 'o')
+
+    this.setState({ player, grid }, () =>
+      window.getSelection().removeAllRanges()
+    )
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { player } = prevState
+    this.checkForWin(player)
   }
 
   render() {
